@@ -7,6 +7,7 @@ require_relative 'metrics'
 
 class App < Sinatra::Base
   register Sinatra::Reloader
+  use Rack::CommonLogger
 
   get '/metrics' do
     content_type 'text/plain'
