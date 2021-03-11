@@ -11,6 +11,10 @@ class App < Sinatra::Base
     use Rack::CommonLogger
   end
 
+  get '/' do
+    
+  end
+
   get '/metrics' do
     content_type 'text/plain'
 
