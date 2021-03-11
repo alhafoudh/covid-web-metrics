@@ -33,8 +33,20 @@ class App < Sinatra::Base
         value: delta_time(fetch_last_updated_from_html('https://covid-web.charlie.freevision.sk')),
       },
       {
+        name: 'covid_web_testing_html_last_modified_cache_delta',
+        value: delta_time(fetch_last_modified_from_http('https://covid.freevision.sk')),
+      },
+      {
+        name: 'covid_web_testing_html_last_modified_origin_delta',
+        value: delta_time(fetch_last_modified_from_http('https://covid-web.charlie.freevision.sk')),
+      },
+      {
         name: 'covid_web_testing_status_last_updated_origin_delta',
         value: delta_time(fetch_status('https://covid-web.charlie.freevision.sk/status.json').dig('testing', 'last_updated_at')),
+      },
+      {
+        name: 'covid_web_testing_status_place_maximum_updated_at_origin_delta',
+        value: delta_time(fetch_status('https://covid-web.charlie.freevision.sk/status.json').dig('testing', 'place_maximum_updated_at')),
       },
 
       {
@@ -46,8 +58,20 @@ class App < Sinatra::Base
         value: delta_time(fetch_last_updated_from_html('https://covid-web.charlie.freevision.sk/vaccination')),
       },
       {
+        name: 'covid_web_vaccination_html_last_modified_cache_delta',
+        value: delta_time(fetch_last_modified_from_http('https://covid.freevision.sk/vaccination')),
+      },
+      {
+        name: 'covid_web_vaccination_html_last_modified_origin_delta',
+        value: delta_time(fetch_last_modified_from_http('https://covid-web.charlie.freevision.sk/vaccination')),
+      },
+      {
         name: 'covid_web_vaccination_status_last_updated_origin_delta',
         value: delta_time(fetch_status('https://covid-web.charlie.freevision.sk/status.json').dig('vaccination', 'last_updated_at')),
+      },
+      {
+        name: 'covid_web_vaccination_status_place_maximum_updated_at_origin_delta',
+        value: delta_time(fetch_status('https://covid-web.charlie.freevision.sk/status.json').dig('vaccination', 'place_maximum_updated_at')),
       },
     ].reduce(StringIO.new) do |acc, metric|
       acc.puts "#{metric[:name]} #{metric[:value]}"
