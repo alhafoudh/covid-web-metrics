@@ -9,6 +9,7 @@ class App < Sinatra::Base
   register Sinatra::Reloader
   configure do
     use Rack::CommonLogger
+    enable :logging
   end
 
   get '/' do
@@ -17,6 +18,11 @@ class App < Sinatra::Base
 
   get '/metrics' do
     content_type 'text/plain'
+
+    logger.info log_url_header('https://covid.freevision.sk', 'X-ETag')
+    logger.info log_url_header('https://covid.freevision.sk/vaccination', 'X-ETag')
+    logger.info log_url_header('https://covid-web.charlie.freevision.sk', 'X-ETag')
+    logger.info log_url_header('https://covid-web.charlie.freevision.sk/vaccination', 'X-ETag')
 
     [
       {
